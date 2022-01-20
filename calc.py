@@ -1,7 +1,7 @@
 # @Author: Narek Boghozian <narekboghozian>
 # @Date:   2022-01-19T12:26:41-08:00
 # @Last modified by:   narekboghozian
-# @Last modified time: 2022-01-19T20:34:01-08:00
+# @Last modified time: 2022-01-19T20:46:02-08:00
 
 
 # Python 3.9.4
@@ -30,12 +30,12 @@ def get_args():
 	if len(sys.argv) > 2:
 		print('You have specified too many arguments')
 		sys.exit()
-
 	if len(sys.argv) < 2:
 		print('You need to specify the sys file to be used\nEx: python calc.py v0_1')
 		sys.exit()
-	input_path = "src/%s.json"%(sys.argv[1])
-	if not os.path.isdir(input_path):
+	input_path = "sys/%s.json" % (str(sys.argv[1]))
+	print(input_path)
+	if not os.path.exists(input_path):
 		print('The sys file specified does not exist')
 		sys.exit()
 	return input_path
@@ -132,10 +132,10 @@ def main():
 		system = json.load(f)
 	# print(system)
 	location = []
-	total_power = find_branch_power("root", system["system"], 24, location)
+	total_power = find_branch_power("root", system["system"], system["system"]["voltage"], location)
 
 	print("\n   Total Power:")
-	print("   " + str(total_power))
+	print("   " + str(total_power) + " (W)")
 	print("\n")
 	# print(rec_gauges)
 	recs = []
@@ -146,7 +146,7 @@ def main():
 			max_name_len = len(rec["path"])
 	max_name_len += 3
 	for rec in rec_gauges:
-		print("   "+rec["path"].ljust(max_name_len, '.') + "  " + str(rec["gauge"]) + "  ..  " + str(rec["dcr"]) )
+		print("   "+(rec["path"] + " ").ljust(max_name_len, '.') + " " + str(rec["gauge"]))# + "  ..  " + str(rec["dcr"]) )
 
 	print("\n")
 
