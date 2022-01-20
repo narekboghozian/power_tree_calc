@@ -1,7 +1,7 @@
 # @Author: Narek Boghozian <narekboghozian>
 # @Date:   2022-01-19T12:26:41-08:00
 # @Last modified by:   narekboghozian
-# @Last modified time: 2022-01-19T20:46:02-08:00
+# @Last modified time: 2022-01-19T20:48:41-08:00
 
 
 # Python 3.9.4
@@ -97,7 +97,9 @@ def find_branch_power(name, branch, voltage, location):
 		# divide by efficiency
 		branch_power /= (branch["efficiency"] / 100)
 
-
+		if "quiescent_power" in branch.keys():
+			quiescent_power = branch["quiescent_power"]
+			branch_power += quiescent_power
 
 	# Else, use stated power
 	else:

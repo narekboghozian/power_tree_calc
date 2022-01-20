@@ -125,8 +125,7 @@ The above example describes a system which looks like this:
 
 Mostly nice-to-have's. Create an 'issue' to ask for one of these.
 
-- Add quiescent current for converters & network switch
-- Add 'lin' - linear regulator node type (+ optional quiescent current)
+- Add 'lin' - linear regulator node type
 - Add 'poe' - power over ethernet node type. This will allow ethernet cable classes rather than gauge sizes to be used.
 - Add template nodes so no need to repeat listing for modules used multiple times
 - Power profile support
