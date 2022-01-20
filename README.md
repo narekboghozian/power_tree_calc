@@ -60,6 +60,8 @@ Each node has values associated with it that are necessary to run the script.
 ##### Optional values:
 - ***'description'***
 	- Use this to add a comment to the node
+- ***'quiescent_power'***
+	- Given in watts
 
 ### Sys file example
 
