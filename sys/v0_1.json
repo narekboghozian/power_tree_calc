@@ -1,0 +1,119 @@
+{
+	"description": "This is only the low level side. Does not include power train (Motor, Steering, Brakes...). Values initially used here are approximations. None of the distances are exact. 100inch was determined as worst case, so for now we use that.",
+	"system":{
+		"type":		"root",
+		"distance":	20,
+		"voltage": 	24,
+		"efficiency": 100,
+		"branches":{
+			"24v_rail":{
+				"description":	"24 volt rail. Added since nws asks for it? According to original power spec slide",
+				"type": 		"dcc",
+				"distance":		20,
+				"voltage":		24,
+				"efficiency":	100,
+				"branches":{
+					"nws":{
+						"description":	"Network Switch. Not including PoE",
+						"type": 		"cli",
+						"distance":		250,
+						"power":		60
+					},
+					"rad":{
+						"description":	"Radio. Minimum power is 7W (24V * 0.3A). Uses passive PoE",
+						"type": 		"cli",
+						"distance":		250,
+						"power":		24
+					}
+
+				}
+
+			},
+
+			"12v_rail":{
+				"description": 	"12 volt rail",
+				"type": 		"dcc",
+				"distance": 	20,
+				"voltage": 		12,
+				"efficiency":	80,
+				"branches":{
+
+					"bpearl":{
+						"description":	"Lidar",
+						"type": 		"cli",
+						"distance":		250,
+						"power":		13
+					},
+
+					"livox_1":{
+						"description":	"Lidar - Livox horizon",
+						"type": 		"cli",
+						"distance":		250,
+						"power":		12
+					},
+
+					"livox_2":{
+						"description":	"Lidar - Livox horizon",
+						"type": 		"cli",
+						"distance":		250,
+						"power":		12
+					},
+
+					"livox_3":{
+						"description":	"Lidar - Livox horizon",
+						"type": 		"cli",
+						"distance":		250,
+						"power":		12
+					},
+
+					"adlink":{
+						"description":	"",
+						"type": 		"cli",
+						"distance":		25,
+						"power":		240
+					},
+
+					"jetson_12v_1":{
+						"description":	"",
+						"type": 		"cli",
+						"distance":		25,
+						"power":		60
+					},
+
+					"jetson_12v_2":{
+						"description":	"",
+						"type": 		"cli",
+						"distance":		25,
+						"power":		60
+					}
+
+				}
+			},
+
+			"5v_rail":{
+				"description": 	"5 volt rail",
+				"type": 		"dcc",
+				"voltage":		5,
+				"distance": 	20,
+				"efficiency":	100,
+				"branches":{
+
+					"zed_2":{
+						"description":	"",
+						"type": 		"cli",
+						"distance":		250,
+						"power":		2
+					},
+
+					"rrtc":{
+						"description":	"",
+						"type": 		"cli",
+						"distance":		250,
+						"power":		1
+					}
+
+				}
+			}
+		}
+	}
+}
