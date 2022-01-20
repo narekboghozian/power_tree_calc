@@ -1,13 +1,13 @@
 # @Author: Narek Boghozian <narekboghozian>
 # @Date:   2022-01-19T12:26:41-08:00
 # @Last modified by:   narekboghozian
-# @Last modified time: 2022-01-19T20:22:18-08:00
+# @Last modified time: 2022-01-19T20:34:01-08:00
 
 
 # Python 3.9.4
 
 import src.gauge_calc as gc
-import json
+import json, os, sys
 import math as m
 
 branching_types = [
@@ -24,6 +24,21 @@ abs_loss = 0.1 # watts
 ratio_loss = 0.01 # proportion
 
 rec_gauges = []
+
+
+def get_args():
+	if len(sys.argv) > 2:
+		print('You have specified too many arguments')
+		sys.exit()
+
+	if len(sys.argv) < 2:
+		print('You need to specify the sys file to be used\nEx: python calc.py v0_1')
+		sys.exit()
+	input_path = "src/%s.json"%(sys.argv[1])
+	if not os.path.isdir(input_path):
+		print('The sys file specified does not exist')
+		sys.exit()
+	return input_path
 
 def load_config():
 
@@ -108,10 +123,10 @@ def find_branch_power(name, branch, voltage, location):
 	return branch_power + dcr_loss
 
 def main():
-
+	sys_path = get_args()
 	load_config()
 	system = {}
-	with open('sys/v0_1.json', 'r', encoding = 'utf-8') as f:
+	with open(sys_path, 'r', encoding = 'utf-8') as f:
 		# file = f.read()
 		# print(file)
 		system = json.load(f)
