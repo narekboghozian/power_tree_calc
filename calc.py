@@ -1,7 +1,7 @@
 # @Author: Narek Boghozian <narekboghozian>
 # @Date:   2022-01-19T12:26:41-08:00
 # @Last modified by:   narekboghozian
-# @Last modified time: 2022-01-19T20:48:41-08:00
+# @Last modified time: 2022-01-20T18:55:52-08:00
 
 
 # Python 3.9.4
@@ -20,8 +20,8 @@ changes_voltage = [
 	"dcc"
 ]
 
-abs_loss = 0.1 # watts
-ratio_loss = 0.01 # proportion
+abs_loss = 0.05 # watts
+ratio_loss = 0.001 # proportion
 
 rec_gauges = []
 
@@ -70,7 +70,7 @@ def find_gauge(power, voltage, distance):
 	# print(target_res)
 	rec_gauge = gc.r2g(target_res, distance)
 	# print(rec_gauge)
-	return (rec_gauge, min_loss_val, target_res)
+	return (rec_gauge, min_loss_val, target_res, current)
 
 def find_branch_power(name, branch, voltage, location):
 
@@ -109,7 +109,7 @@ def find_branch_power(name, branch, voltage, location):
 	# Wire DCR stuff
 
 	dist_m = branch["distance"] / 100
-	rec_gauge, dcr_loss, opt_res = find_gauge(branch_power, voltage, dist_m)
+	rec_gauge, dcr_loss, opt_res, current = find_gauge(branch_power, voltage, dist_m)
 	# full_loc = " > ".join(location) + " > " + name
 	full_loc = location.copy()
 	full_loc.insert(0, "Supply")
@@ -117,7 +117,8 @@ def find_branch_power(name, branch, voltage, location):
 	temp = {
 		"path": full_loc,
 		"gauge": m.floor(rec_gauge),
-		"dcr": opt_res
+		"dcr": opt_res,
+		"current": current
 		}
 	# rec_gauges.append(full_loc + "  :  " + str(m.floor(rec_gauge)))# + " for " + str(opt_res))
 	rec_gauges.append(temp)
@@ -148,7 +149,7 @@ def main():
 			max_name_len = len(rec["path"])
 	max_name_len += 3
 	for rec in rec_gauges:
-		print("   "+(rec["path"] + " ").ljust(max_name_len, '.') + " " + str(rec["gauge"]))# + "  ..  " + str(rec["dcr"]) )
+		print("   "+(rec["path"] + " ").ljust(max_name_len, '.') + " " + str(rec["gauge"]) + " AWG .... " + str(round(rec["current"], 2)) + " A" )
 
 	print("\n")
 

@@ -2,11 +2,11 @@
 	"default":{
 		"abs_loss":{
 			"description": "Power loss of wire in absolute terms. Given in watts",
-			"value": 0.1
+			"value": 0.05
 		},
 		"ratio_loss":{
 			"description": "Power loss of wire relative to power flowing through. Given as proportion",
-			"value": 0.01
+			"value": 0.001
 		}
 	}
 }

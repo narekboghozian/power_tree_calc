@@ -33,7 +33,7 @@ Note: Example rooted tree has symmetrical structure. This is not necessary.
 
 Each node has values associated with it that are necessary to run the script.
 
-##### Required values:
+#### Required values:
 - ***'name'***
 	- The thing that goes in the parent nodes 'branches' list
 - ***'type'***
@@ -57,7 +57,7 @@ Each node has values associated with it that are necessary to run the script.
 		- DC / DC Converter type nodes
 	- Given in %
 
-##### Optional values:
+#### Optional values:
 - ***'description'***
 	- Use this to add a comment to the node
 - ***'quiescent_power'***
@@ -131,11 +131,14 @@ Mostly nice-to-have's. Create an 'issue' to ask for one of these.
 - Add 'poe' - power over ethernet node type. This will allow ethernet cable classes rather than gauge sizes to be used.
 - Add template nodes so no need to repeat listing for modules used multiple times
 - Power profile support
+	- Time constant support
+	- Convolution to find peak power spikes
 - Add 'path_dcr' as alternative to distance.
 - Add 'gauge' so path dcr can be calculated from that instead of default loss parameters in config.
 - Add 'current' option for clients if necessary. Will either use last declared voltage on path or something else...
 - Add more node types (as needed)
 - Add DC / DC Converter efficiency curve feature
 - Separate into descriptions & comments?
-- Stop ignoring voltage drop
+- Stop ignoring voltage drop?
 - Allow sys file specific overrides to config stuff
+- Make it object oriented
