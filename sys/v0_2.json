@@ -1,5 +1,5 @@
 {
-	"description": "This is only the low level side. Does not include power train (Motor, Steering, Brakes...). Values initially used here are approximations. None of the distances are exact. 100inch was determined as worst case, so for now we use that.",
+	"description": "This is the v0.2 PDN for the low level side. The values here are all max power draw figures, so the actual power consumption of the system will be less although as of writing this it is not yet clear by how much. Note: This does not include power train (Motor, Steering, Brakes...)",
 	"system":{
 		"type":		"root",
 		"distance":	20,
@@ -16,13 +16,13 @@
 					"nws":{
 						"description":	"Network Switch. Not including PoE",
 						"type": 		"cli",
-						"distance":		250,
+						"distance":		50,
 						"power":		8
 					},
 					"rad":{
 						"description":	"Radio. Minimum power is 7W (24V * 0.3A). Uses passive PoE",
 						"type": 		"cli",
-						"distance":		250,
+						"distance":		50,
 						"power":		8
 					}
 

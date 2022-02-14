@@ -143,7 +143,7 @@ def main():
 	location = []
 	total_power = find_branch_power("root", system["system"], system["system"]["voltage"], location)
 	print("\n   Total Power:")
-	print("   " + str(total_power) + " (W)")
+	print("   " + str(round(total_power, 3)) + " (W)")
 	print("\n")
 	recs = []
 	max_name_len = 0
