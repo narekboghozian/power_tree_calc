@@ -11,105 +11,128 @@
 				"type": 		"dcc",
 				"distance":		20,
 				"voltage":		24,
-				"efficiency":	100,
+				"efficiency":	85,
 				"branches":{
 					"nws":{
 						"description":	"Network Switch. Not including PoE",
 						"type": 		"cli",
 						"distance":		250,
-						"power":		60
+						"power":		8
 					},
 					"rad":{
 						"description":	"Radio. Minimum power is 7W (24V * 0.3A). Uses passive PoE",
 						"type": 		"cli",
 						"distance":		250,
-						"power":		24
+						"power":		8
+					}
+
+				}
+
+			},
+			"12v_A":{
+				"description":	"12 volt rail. Dedicated to ADLINK",
+				"type": 		"dcc",
+				"distance":		20,
+				"voltage":		12,
+				"efficiency":	90,
+				"branches":{
+					"adlink":{
+						"description":	"ADLINK computer. Power figure is the rated power supply spec",
+						"type": 		"cli",
+						"distance":		50,
+						"power":		240
+					},
+					"zed2":{
+						"description":	"Zed 2 camera. 5W figure accounts for 2 cameras, powered via USB from adlink",
+						"type": 		"cli",
+						"distance":		10,
+						"power":		5
 					}
 
 				}
 
 			},
 
-			"12v_rail":{
+			"12v_B":{
 				"description": 	"12 volt rail",
 				"type": 		"dcc",
 				"distance": 	20,
 				"voltage": 		12,
-				"efficiency":	80,
+				"efficiency":	85,
 				"branches":{
 
 					"bpearl":{
 						"description":	"Lidar",
 						"type": 		"cli",
-						"distance":		250,
+						"distance":		100,
 						"power":		13
 					},
 
 					"livox_1":{
 						"description":	"Lidar - Livox horizon",
 						"type": 		"cli",
-						"distance":		250,
-						"power":		12
+						"distance":		150,
+						"power":		30
 					},
 
 					"livox_2":{
 						"description":	"Lidar - Livox horizon",
 						"type": 		"cli",
-						"distance":		250,
-						"power":		12
+						"distance":		150,
+						"power":		30
 					},
 
 					"livox_3":{
 						"description":	"Lidar - Livox horizon",
 						"type": 		"cli",
-						"distance":		250,
-						"power":		12
-					},
-
-					"adlink":{
-						"description":	"",
-						"type": 		"cli",
-						"distance":		25,
-						"power":		240
+						"distance":		150,
+						"power":		30
 					},
 
 					"jetson_12v_1":{
 						"description":	"",
 						"type": 		"cli",
 						"distance":		25,
-						"power":		60
+						"power":		30
 					},
 
 					"jetson_12v_2":{
 						"description":	"",
 						"type": 		"cli",
 						"distance":		25,
-						"power":		60
+						"power":		30
+					},
+
+					"cell_modem":{
+						"description":	"",
+						"type": 		"cli",
+						"distance":		25,
+						"power":		24
+					},
+
+					"gnss_atlas":{
+						"description":	"",
+						"type": 		"cli",
+						"distance":		25,
+						"power":		10
 					}
 
 				}
 			},
 
-			"5v_rail":{
+			"12v_C":{
 				"description": 	"5 volt rail",
 				"type": 		"dcc",
-				"voltage":		5,
+				"voltage":		12,
 				"distance": 	20,
-				"efficiency":	100,
+				"efficiency":	90,
 				"branches":{
-
-					"zed_2":{
-						"description":	"",
-						"type": 		"cli",
-						"distance":		250,
-						"power":		2
-					},
 
 					"rrtc":{
 						"description":	"",
 						"type": 		"cli",
-						"distance":		250,
-						"power":		1
+						"distance":		100,
+						"power":		20
 					}
 
 				}

@@ -120,8 +120,6 @@ The above example describes a system which looks like this:
 	|--- Camera
 	|
 	|--- Radio
-
-
 ```
 
 Running the calculator on this system yields:
