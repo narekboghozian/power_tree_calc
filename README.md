@@ -130,7 +130,7 @@ Running the calculator on this system yields:
    sys/test_sys.json
 
    Total Power:
-   55.195124755865976 (W)
+   55.195 (W)
 
 
    Supply > root <-- 50 cm --> computer ............. 14 AWG .... 4.17 A
