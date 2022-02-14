@@ -9,6 +9,7 @@
 import src.gauge_calc as gc
 import json, os, sys
 import math as m
+import pandas as pd
 
 branching_types = [
 	"root",
@@ -22,9 +23,8 @@ changes_voltage = [
 
 abs_loss = 0.05 # watts
 ratio_loss = 0.001 # proportion
-
 rec_gauges = []
-
+standard_gauge_info = pd.read_csv("lib/gauge_info.csv")
 
 def get_args():
 	if len(sys.argv) > 2:
@@ -34,7 +34,7 @@ def get_args():
 		print('You need to specify the sys file to be used\nEx: python calc.py v0_1')
 		sys.exit()
 	input_path = "sys/%s.json" % (str(sys.argv[1]))
-	print(input_path)
+	print("\n   "+input_path)
 	if not os.path.exists(input_path):
 		print('The sys file specified does not exist')
 		sys.exit()
@@ -50,7 +50,7 @@ def load_config():
 
 	# Add override within sys file
 
-def find_gauge(power, voltage, distance):
+def find_gauge_power(power, voltage, distance):
 
 	# find target resistance
 	## calc power lost from ratio loss and compare to abs loss, take min
@@ -72,44 +72,53 @@ def find_gauge(power, voltage, distance):
 	# print(rec_gauge)
 	return (rec_gauge, min_loss_val, target_res, current)
 
-def find_branch_power(name, branch, voltage, location):
+def find_gauge_standard(power, voltage, distance):
+	# print("Power: %s, Voltage: %s, distance: %s"%(power, voltage, distance))
+	current = power / voltage
+	rec_gauge = -100
+	ind = -100
+	for index, row in standard_gauge_info[::-1].iterrows():
+		# print(row["max_amps_chassis"])
+		even = False
+		awg = row["awg"]
+		if awg > 0:
+			if awg % 2 == 0:
+				even = True
+		if (current <= row["max_amps_transmission"]) and (even):
+			rec_gauge = row["awg"]
+			ind = index
+			break
+	res = standard_gauge_info.iloc[ind]["ohm_1000_m"] * distance / 1000
+	dcr_loss = current ** 2 * res
+	# print("res: %s"%(str(standard_gauge_info.iloc[ind]["ohm_1000_m"])))
+	return (rec_gauge, dcr_loss, res, current)
 
-	# Find info about branch
-	# print("\n")
-	# print(location)
+def find_branch_power(name, branch, voltage, location):
 	type = branch["type"]
 	branching = type in branching_types
 	branch_power = 0
-
 	# If has branches, use recursion
 	if branching:
-
 		new_loc = location.copy()
 		new_loc.append(name)
-
 		new_voltage = voltage
 		if type in changes_voltage:
 			new_voltage = branch["voltage"]
-
 		for sub_branch in branch["branches"]:
 			branch_power +=	find_branch_power(sub_branch, branch["branches"][sub_branch], new_voltage, new_loc)
-
 		# divide by efficiency
 		branch_power /= (branch["efficiency"] / 100)
-
 		if "quiescent_power" in branch.keys():
 			quiescent_power = branch["quiescent_power"]
 			branch_power += quiescent_power
-
 	# Else, use stated power
 	else:
-
 		branch_power += branch["power"]
-
+	# print("branch power: %s"%(branch_power))
 	# Wire DCR stuff
 
 	dist_m = branch["distance"] / 100
-	rec_gauge, dcr_loss, opt_res, current = find_gauge(branch_power, voltage, dist_m)
+	rec_gauge, dcr_loss, opt_res, current = find_gauge_standard(branch_power, voltage, dist_m)
 	# full_loc = " > ".join(location) + " > " + name
 	full_loc = location.copy()
 	full_loc.insert(0, "Supply")
@@ -130,17 +139,12 @@ def main():
 	load_config()
 	system = {}
 	with open(sys_path, 'r', encoding = 'utf-8') as f:
-		# file = f.read()
-		# print(file)
 		system = json.load(f)
-	# print(system)
 	location = []
 	total_power = find_branch_power("root", system["system"], system["system"]["voltage"], location)
-
 	print("\n   Total Power:")
 	print("   " + str(total_power) + " (W)")
 	print("\n")
-	# print(rec_gauges)
 	recs = []
 	max_name_len = 0
 	for rec in rec_gauges:

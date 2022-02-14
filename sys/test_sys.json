@@ -1,0 +1,38 @@
+{
+	"description": "Explain this system here",
+	"system":{
+		"type":	"root",
+		"efficiency": 100,
+		"distance":	50,
+		"voltage": 12,
+		"branches":{
+			"computer": {
+				"description":"The computer. Model #qwerty123",
+				"type": "client",
+				"distance": 50,
+				"power": 50
+			},
+			"converter": {
+				"description":"A DC / DC Converter",
+				"type": "dcc",
+				"distance": 15,
+				"voltage": 5,
+				"efficiency": 80,
+				"branches":{
+					"camera": {
+						"description": "The rear camera",
+						"type": "client",
+						"distance": 100,
+						"power": 2
+					},
+					"radio": {
+						"description": "The controller radio",
+						"type": "client",
+						"distance": 100,
+						"power": 2
+					}
+				}
+			}
+		}
+	}
+}

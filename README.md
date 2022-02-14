@@ -70,6 +70,9 @@ Each node has values associated with it that are necessary to run the script.
 {
 	"description": "Explain this system here",
 	"system":{
+		"type":	"root",
+		"efficiency": 100,
+		"distance":	50,
 		"voltage": 12,
 		"branches":{
 			"computer": {
@@ -118,6 +121,25 @@ The above example describes a system which looks like this:
 	|
 	|--- Radio
 
+
+```
+
+Running the calculator on this system yields:
+``` bash
+
+>>> python calc.py test_sys
+
+   sys/test_sys.json
+
+   Total Power:
+   55.195124755865976 (W)
+
+
+   Supply > root <-- 50 cm --> computer ............. 14 AWG .... 4.17 A
+   Supply > root > converter <-- 100 cm --> camera .. 24 AWG .... 0.4 A
+   Supply > root > converter <-- 100 cm --> radio ... 24 AWG .... 0.4 A
+   Supply > root <-- 15 cm --> converter ............ 24 AWG .... 0.42 A
+   Supply <-- 50 cm --> root ........................ 14 AWG .... 4.59 A
 
 ```
 
