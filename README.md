@@ -156,11 +156,15 @@ Mostly nice-to-have's. Create an 'issue' to ask for one of these.
 	- Time constant support
 	- Convolution to find peak power spikes
 - Add 'path_dcr' as alternative to distance.
-- Add 'gauge' so path dcr can be calculated from that instead of default loss parameters in config.
 - Add 'current' option for clients if necessary. Will either use last declared voltage on path or something else...
 - Add more node types (as needed)
 - Add DC / DC Converter efficiency curve feature
 - Separate into descriptions & comments?
 - Stop ignoring voltage drop?
 - Allow sys file specific overrides to config stuff
-- Make it object oriented
+- Make it object oriented  
+
+Done:
+
+- Add 'gauge' so path dcr can be calculated from that instead of default loss parameters in config.
+- Use only even gauge sizes
