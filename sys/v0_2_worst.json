@@ -1,0 +1,142 @@
+{
+	"description": "This is the v0.2 PDN for the low level side. The values here are all max power draw figures, so the actual power consumption of the system will be less although as of writing this it is not yet clear by how much. Note: This does not include power train (Motor, Steering, Brakes...)",
+	"system":{
+		"type":		"root",
+		"distance":	20,
+		"voltage": 	18,
+		"efficiency": 100,
+		"branches":{
+			"24v_A":{
+				"description":	"24 volt rail. Added since nws asks for it? According to original power spec slide",
+				"type": 		"dcc",
+				"distance":		20,
+				"voltage":		24,
+				"efficiency":	85,
+				"branches":{
+					"nws":{
+						"description":	"Network Switch. Not including PoE",
+						"type": 		"cli",
+						"distance":		50,
+						"power":		8
+					},
+					"rad":{
+						"description":	"Radio. Minimum power is 7W (24V * 0.3A). Uses passive PoE",
+						"type": 		"cli",
+						"distance":		50,
+						"power":		8
+					}
+
+				}
+
+			},
+			"12v_A":{
+				"description":	"12 volt rail. Dedicated to ADLINK",
+				"type": 		"dcc",
+				"distance":		20,
+				"voltage":		12,
+				"efficiency":	90,
+				"branches":{
+					"adlink":{
+						"description":	"ADLINK computer. Power figure is the rated power supply spec",
+						"type": 		"cli",
+						"distance":		50,
+						"power":		240
+					},
+					"zed2":{
+						"description":	"Zed 2 camera. 5W figure accounts for 2 cameras, powered via USB from adlink",
+						"type": 		"cli",
+						"distance":		10,
+						"power":		5
+					}
+
+				}
+
+			},
+
+			"12v_B":{
+				"description": 	"12 volt rail",
+				"type": 		"dcc",
+				"distance": 	20,
+				"voltage": 		12,
+				"efficiency":	85,
+				"branches":{
+
+					"bpearl":{
+						"description":	"Lidar",
+						"type": 		"cli",
+						"distance":		100,
+						"power":		13
+					},
+
+					"livox_1":{
+						"description":	"Lidar - Livox horizon",
+						"type": 		"cli",
+						"distance":		150,
+						"power":		30
+					},
+
+					"livox_2":{
+						"description":	"Lidar - Livox horizon",
+						"type": 		"cli",
+						"distance":		150,
+						"power":		30
+					},
+
+					"livox_3":{
+						"description":	"Lidar - Livox horizon",
+						"type": 		"cli",
+						"distance":		150,
+						"power":		30
+					},
+
+					"jetson_12v_1":{
+						"description":	"",
+						"type": 		"cli",
+						"distance":		25,
+						"power":		30
+					},
+
+					"jetson_12v_2":{
+						"description":	"",
+						"type": 		"cli",
+						"distance":		25,
+						"power":		30
+					},
+
+					"cell_modem":{
+						"description":	"",
+						"type": 		"cli",
+						"distance":		25,
+						"power":		24
+					},
+
+					"gnss_atlas":{
+						"description":	"",
+						"type": 		"cli",
+						"distance":		25,
+						"power":		10
+					}
+
+				}
+			},
+
+			"12v_C":{
+				"description": 	"5 volt rail",
+				"type": 		"dcc",
+				"voltage":		12,
+				"distance": 	20,
+				"efficiency":	90,
+				"branches":{
+
+					"rrtc":{
+						"description":	"",
+						"type": 		"cli",
+						"distance":		100,
+						"power":		20
+					}
+
+				}
+			}
+		}
+	}
+}
