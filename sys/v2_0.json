@@ -3,7 +3,7 @@
 	"system":{
 		"type":		"root",
 		"distance":	20,
-		"voltage": 	24,
+		"voltage": 	18,
 		"efficiency": 100,
 		"branches":{
 			"24v_A":{
@@ -109,29 +109,15 @@
 						"type": 		"cli",
 						"distance":		25,
 						"power":		10
-					}
-
-				}
-			},
-			"12v_C":{
-				"description":	"12 volt rail. Dedicated to ADLINK",
-				"type": 		"dcc",
-				"distance":		20,
-				"voltage":		12,
-				"efficiency":	90,
-				"branches":{
-					"adlink":{
-						"description":	"ADLINK computer. Power figure is the rated power supply spec",
-						"type": 		"cli",
-						"distance":		50,
-						"power":		240
 					},
+
 					"zed2":{
 						"description":	"Zed 2 camera. 5W figure accounts for 2 cameras, powered via USB from adlink",
 						"type": 		"cli",
 						"distance":		10,
 						"power":		5
 					}
+
 				}
 			}
 		}
