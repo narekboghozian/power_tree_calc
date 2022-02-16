@@ -147,6 +147,8 @@ Running the calculator on this system yields:
 
 Mostly nice-to-have's. Create an 'issue' to ask for one of these.
 
+- Add base option so that another system can be copied and modified
+- Add Min/Nom/Max voltage and to calculate under various conditions
 - Add 'lin' - linear regulator node type
 - Add 'poe' - power over ethernet node type. This will allow ethernet cable classes rather than gauge sizes to be used.
 - Add template nodes so no need to repeat listing for modules used multiple times
