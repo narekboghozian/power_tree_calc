@@ -1,5 +1,7 @@
 # power-loss-calc
 
+*This script was created to help calculate power consumption for an autonomous electrical go-kart at UC San Diego. This is not currently under development.*
+
 This script is used to calculate power losses in the system. It will also tell you what the minimum gauge of your wires should be to achieve certain default maximum power losses on those wires.  
 
 Future functionality may be added. See 'To-do' section at the end.
